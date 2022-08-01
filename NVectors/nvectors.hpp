@@ -54,13 +54,16 @@ namespace NVector
          * @param vector The basis vector to be added.
          * 
          * @param value The value to be added.
+         *  
+         * @return A copy of the vector with the value added to each of its 
+         * entries.
         */
         friend NVector<T> operator + (NVector<T>& vector, T value)
         {
             // Create a new vector.
             NVector<T> vector0 = NVector<T>(vector.size());
             
-            // Add the value.
+            // Add the value to the vector.
             for(size_t i = 0; i < vector.size(); ++i)
                 vector0[i] = vector[i] + value;
 
@@ -71,16 +74,19 @@ namespace NVector
          * Addition operator overload. To add a scalar quantity to the current
          * NVector.
          * 
+         * @param value The value to be added.
+         * 
          * @param vector The basis vector to be added.
          * 
-         * @param value The value to be added.
+         * @return A copy of the vector with the value added to each of its 
+         * entries.
         */
         friend NVector<T> operator + (T value, NVector<T>& vector)
         {
             // Create a new vector.
             NVector<T> vector0 = NVector<T>(vector.size());
             
-            // Add the value.
+            // Add the value to the vector.
             for(size_t i = 0; i < vector.size(); ++i)
                 vector0[i] = vector[i] + value;
 
@@ -91,10 +97,18 @@ namespace NVector
          * Addition operator overload. To add another NVector to the current
          * NVector.
          * 
-         * @param vector The vector to be added.
+         * @param vector The vector to be added to the current vector.
+         * 
+         * @return A copy of the vector with the value added to each of its
+         * entries.
         */
         NVector<T> operator + (NVector<T>& vector)
         {
+            // Validate the dimensionality of the vector to be added.
+            ValidationGeneral::validateDimensions(
+                dimension, vector.size(), true
+            );
+
             // Create a new vector.
             NVector<T> vector0 = NVector<T>(dimension);
             
@@ -113,14 +127,14 @@ namespace NVector
          * 
          * @param value The value to be subtracted.
         */
-        NVector<T> operator - (const T value)
+        friend NVector<T> operator - (NVector<T>& vector, const T value)
         {
             // Create a new vector.
-            NVector<T> vector0 = NVector<T>(dimension);
+            NVector<T> vector0 = NVector<T>(vector.size());
             
             // Add the value.
-            for(size_t i = 0; i < container.size(); ++i)
-                vector0[i] = container[i] - value;
+            for(size_t i = 0; i < vector.size(); ++i)
+                vector0[i] = vector[i] - value;
 
             return vector0;
         }
