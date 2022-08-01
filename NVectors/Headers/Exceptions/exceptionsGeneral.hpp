@@ -24,53 +24,6 @@ namespace ExceptionsGeneral
     //##########################################################################
 
     /**
-     * Class that builds the exceptions when an index is out of bounds.
-    */
-    class Numerical : virtual public std::exception
-    {
-        //######################################################################
-        // Public Interface.
-        //######################################################################
-
-        public:
-
-        //----------------------------------------------------------------------
-        // Constructor.
-        //----------------------------------------------------------------------
-
-        /**
-         * Constructor for the exception, customizes the exception message.
-        */
-        Numerical()
-        {
-            // Create the message.
-            message = "The requested variable is not of numerical type.";
-        }
-
-        /**
-         * Throws the exception.
-        */
-        virtual const char * what() const throw()
-        {   
-            // Set the custom message.
-            return message.c_str();
-        }
-
-        //######################################################################
-        // Private Interface.
-        //######################################################################
-
-        private:
-
-        //----------------------------------------------------------------------
-        // Variables.
-        //----------------------------------------------------------------------
-
-        // String that contains the exception message.
-        std::string message{};
-    };
-
-    /**
      * Class that builds the exceptions when the number of requested dimensions
      * doesn't match the number of expected dimensions.
     */
@@ -100,6 +53,101 @@ namespace ExceptionsGeneral
             "expected number of dimensions.\n" 
             "\n\tExpected: " + std::to_string(expected) + "" 
             "\n\tRequested: " + std::to_string(requested) + "\n";
+        }
+
+        /**
+         * Throws the exception.
+        */
+        virtual const char * what() const throw()
+        {   
+            // Set the custom message.
+            return message.c_str();
+        }
+
+        //######################################################################
+        // Private Interface.
+        //######################################################################
+
+        private:
+
+        //----------------------------------------------------------------------
+        // Variables.
+        //----------------------------------------------------------------------
+
+        // String that contains the exception message.
+        std::string message{};
+    };
+
+    /**
+     * Class that builds the exceptions when a division by zero is attempted.
+    */
+    class DivisionByZero : virtual public std::exception
+    {
+        //######################################################################
+        // Public Interface.
+        //######################################################################
+
+        public:
+
+        //----------------------------------------------------------------------
+        // Constructor.
+        //----------------------------------------------------------------------
+
+        /**
+         * Constructor for the exception, customizes the exception message.
+        */
+        DivisionByZero()
+        {
+            // Create the message.
+            message = "A division by zero has been attempted, this is not "
+            "possible.";
+        }
+
+        /**
+         * Throws the exception.
+        */
+        virtual const char * what() const throw()
+        {   
+            // Set the custom message.
+            return message.c_str();
+        }
+
+        //######################################################################
+        // Private Interface.
+        //######################################################################
+
+        private:
+
+        //----------------------------------------------------------------------
+        // Variables.
+        //----------------------------------------------------------------------
+
+        // String that contains the exception message.
+        std::string message{};
+    };
+
+    /**
+     * Class that builds the exceptions when an index is out of bounds.
+    */
+    class Numerical : virtual public std::exception
+    {
+        //######################################################################
+        // Public Interface.
+        //######################################################################
+
+        public:
+
+        //----------------------------------------------------------------------
+        // Constructor.
+        //----------------------------------------------------------------------
+
+        /**
+         * Constructor for the exception, customizes the exception message.
+        */
+        Numerical()
+        {
+            // Create the message.
+            message = "The requested variable is not of numerical type.";
         }
 
         /**
