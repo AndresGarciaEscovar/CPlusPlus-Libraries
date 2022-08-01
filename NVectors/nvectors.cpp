@@ -25,7 +25,7 @@ int main()
     NVector::NVector<int> temp = NVector::NVector<int>(3, 9),
         temp1 = NVector::NVector<int>(3, 7);
     
-    temp = temp - temp1;
+    temp = 1 + temp;
 
     std::cout << temp[0] << ", " << temp[1] << ", " << temp[2] << std::endl;
 
