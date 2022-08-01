@@ -22,12 +22,14 @@
 int main()
 {
     int i = 1;
-    NVector::NVector<int> temp = NVector::NVector<int>(3, 9),
-        temp1 = NVector::NVector<int>(3, 7);
-    
-    temp = 1 + temp;
+    NVector::NVector<double> temp = NVector::NVector<double>(3, 9),
+        temp1 = NVector::NVector<double>(3, 7),
+        temp2 = NVector::NVector<double>(3, 8);
+     
+    temp =  (temp1 + temp2) * 0.5;
 
-    std::cout << temp[0] << ", " << temp[1] << ", " << temp[2] << std::endl;
+    std::cout << "Dot product: " << temp.dotProduct(temp1) << std::endl;
+    std::cout << temp.normSquared() << std::endl;
 
     return 0;
 }
