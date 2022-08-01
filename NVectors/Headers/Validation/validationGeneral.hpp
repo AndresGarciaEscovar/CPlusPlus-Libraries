@@ -8,6 +8,7 @@
 //##############################################################################
 
 // General.
+#include <cmath>
 #include <typeinfo>
 
 // User defined.
@@ -33,6 +34,10 @@ namespace ValidationGeneral
 
     // Determines if the given variable is of a standard numerical type.
     template <typename T>
+    bool isNotDivingByZero(T variable, bool exception);
+
+    // Determines if the given variable is of a standard numerical type.
+    template <typename T>
     bool isNumber(T variable, bool exception);
 
     ////////////////////////////////////////////////////////////////////////////
@@ -48,7 +53,7 @@ namespace ValidationGeneral
 
     // Validates if the number is in the given range.
     bool validateInRange(
-        size_t expectedl, size_t expectedh, size_t requested, bool exception
+        size_t requested, size_t expectedl, size_t expectedh,  bool exception
     );
 
     //##########################################################################
@@ -59,6 +64,34 @@ namespace ValidationGeneral
     // Is Functions
     //--------------------------------------------------------------------------
 
+    /**
+     * Determines if the given variable is NOT dividing by zero.
+     * 
+     * @param variable The variable whose division value is to be determined.
+     * 
+     * @param exception A boolean flag that indicates if an exception must be
+     * thrown if validation fails. True, if an exception must be thrown if 
+     * validation fails; False, otherwise.
+     * 
+     * @return True, if the variable is not dividing by zero, i.e., has a finite
+     * division type. False, otherwise.
+     * 
+     * @throw ExceptionsGeneral::DivisionByZero, if the variable being checked 
+     * when dividing a finite quanity is infinite or undetermined.
+    */ 
+    template <typename T>
+    bool isNotDivingByZero(T variable, bool exception)
+    {   
+        // Initialize the variables.
+        T var = (T) 1 / variable; 
+        bool valid = !(std::isnan(var) || std::isinf(var));
+
+        // Throw an exception if needed.
+        if(!valid && exception) ExceptionsGeneral::DivisionByZero();
+
+        return valid;
+    }
+    
     /**
      * Determines if the given variable is of a standard numerical type.
      * 

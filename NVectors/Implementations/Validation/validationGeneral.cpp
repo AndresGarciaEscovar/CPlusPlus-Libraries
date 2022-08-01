@@ -16,6 +16,9 @@
 
 namespace ValidationGeneral
 {
+    //##########################################################################
+    // Functions
+    //##########################################################################
 
     //--------------------------------------------------------------------------
     // Validation Functions
@@ -68,7 +71,7 @@ namespace ValidationGeneral
      * dimensions doesn't match the expected number of dimensions.
     */ 
     bool validateInRange(
-        size_t expectedl, size_t expectedh, size_t requested, bool exception
+        size_t requested, size_t expectedl, size_t expectedh,  bool exception
     )
     {   
         // Initialize the variable.
