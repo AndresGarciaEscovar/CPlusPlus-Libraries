@@ -248,7 +248,33 @@ namespace NVector
         ////////////////////////////////////////////////////////////////////////
         // Other Functionality
         ////////////////////////////////////////////////////////////////////////
-        
+
+        /**
+         * Index operator overload. To be able to access the indexes of the
+         * vector.
+         * 
+         * @param out A reference to the ostream operator.
+         * 
+         * @param vector A reference to the vector to be printed.
+        */
+        friend std::ostream& operator << (std::ostream& out, NVector<T>& vector)
+        {   
+            // Open the vector.
+            out << "(";
+
+            // Print the content.
+            for(size_t i = 0; i < vector.size(); ++i)
+            {
+                out << vector[i];
+                if(i < vector.size() - 1) out << ", ";
+            }
+
+            // Close the vector.
+            out << ")";
+
+            return out;
+        }
+
         /**
          * Index operator overload. To be able to access the indexes of the
          * vector.
