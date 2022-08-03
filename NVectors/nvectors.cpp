@@ -28,7 +28,7 @@ int main()
      
     temp =  (temp1 + temp2) * 0.5;
 
-    std::cout << temp << std::endl;
+    std::cout << (temp == temp) << std::endl;
     std::cout << "Dot product: " << temp.dotProduct(temp1) << std::endl;
     std::cout << temp.normSquared() << std::endl;
 
