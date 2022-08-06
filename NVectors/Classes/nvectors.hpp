@@ -3,9 +3,11 @@
 */
 #pragma once
 
+
 //##############################################################################
 // Imports
 //##############################################################################
+
 
 // General.
 #include <iostream>
@@ -14,14 +16,18 @@
 #include <typeinfo>
 #include <vector>
 
+
 // User defined.
 #include "./Headers/Validation/validationGeneral.hpp"
+#include "./Headers/Validation/validationNumerical.hpp"
+
 
 namespace NVector
 {
     //##########################################################################
     // Classes
     //##########################################################################
+
 
     template <class T>
     class NVector
@@ -31,9 +37,11 @@ namespace NVector
         // Operator Overloads
         //######################################################################
 
+
         ////////////////////////////////////////////////////////////////////////
         // Arithmetic
         ////////////////////////////////////////////////////////////////////////
+
 
         /**
          * Addition operator overload. To add a scalar quantity to the current
@@ -58,6 +66,7 @@ namespace NVector
             return vector0;
         }
 
+
         /**
          * Addition operator overload. To add a scalar quantity to the current
          * NVector.
@@ -80,6 +89,7 @@ namespace NVector
 
             return vector0;
         }
+
 
         /**
          * Addition operator overload. To add another NVector to the current
@@ -107,6 +117,7 @@ namespace NVector
             return vector0;
         }
 
+
         /**
          * Division operator overload. To divide each entry of the vector by the
          * given scalar quantity.
@@ -133,6 +144,7 @@ namespace NVector
             return vector0;
         }
 
+
         /**
          * Multiplication operator overload. To multiply each entry of the
          * vector by the given scalar quantity.
@@ -155,6 +167,7 @@ namespace NVector
 
             return vector0;
         }
+
 
         /**
          * Multiplication operator overload. To multiply each entry of the
@@ -179,6 +192,7 @@ namespace NVector
             return vector0;
         }
 
+
         /**
          * Subtraction operator overload. To subtract a scalar quantity from the
          * current NVector.
@@ -199,6 +213,7 @@ namespace NVector
             return vector0;
         }
 
+
         /**
          * Subtraction operator overload. To subtract another NVector from the
          * current NVector and make it negative.
@@ -218,6 +233,7 @@ namespace NVector
 
             return vector0;
         }
+
 
         /**
          * Subtraction operator overload. To subtract another NVector from the
@@ -245,9 +261,11 @@ namespace NVector
             return vector0;
         }
 
+
         ////////////////////////////////////////////////////////////////////////
         // Other Functionality
         ////////////////////////////////////////////////////////////////////////
+
 
         /**
          * Comparison operator. To be able to access the indexes of the
@@ -270,6 +288,7 @@ namespace NVector
 
             return valid;
         }
+
 
         /**
          * Outstream string to be print the vector. To be able to view the
@@ -297,6 +316,7 @@ namespace NVector
             return out;
         }
 
+
         /**
          * Index operator overload. To be able to access the indexes of the
          * vector.
@@ -314,9 +334,11 @@ namespace NVector
             return container[index];
         }
 
+
         //######################################################################
         // Constructor(s) and Destructor(s)
         //######################################################################
+
 
         /**
          * Constructs a new vector type. Will be initialized with the zero
@@ -330,10 +352,11 @@ namespace NVector
         {
             // Validate that it's a numerical type.
             T i;
-            ValidationGeneral::isNumber<T>(i, true);
+            ValidationNumerical::isNumber<T>(i, true);
             container = std::vector<T>(dimension, (T) 0);
             container.shrink_to_fit();
         }
+
 
         /**
          * Constructs a new vector type.
@@ -347,15 +370,17 @@ namespace NVector
         dimension{dimensions}
         {   
             // Validate that it's of a numerical type.
-            ValidationGeneral::isNumber<T>(value, true);
+            ValidationNumerical::isNumber<T>(value, true);
             container = std::vector<T>(dimension, value);
             container.shrink_to_fit();
         }
+
 
         /**
          * Destructs the given object pointer.
         */
         ~NVector(){}
+
 
         //######################################################################
         // Functions
@@ -364,6 +389,7 @@ namespace NVector
         ////////////////////////////////////////////////////////////////////////
         // Non-Template Functions
         ////////////////////////////////////////////////////////////////////////
+
 
         /**
          * Returns the current size of the container.
@@ -375,9 +401,11 @@ namespace NVector
             return container.size();
         }
 
+
         ////////////////////////////////////////////////////////////////////////
         // Template Functions
         ////////////////////////////////////////////////////////////////////////
+
 
         /**
          * Returns the cross product between two vectors.
@@ -403,6 +431,7 @@ namespace NVector
             return vector0;
         }
 
+
         /**
          * Returns the normalized version of the vector itself.
          * 
@@ -424,6 +453,7 @@ namespace NVector
             return vector;
         }
 
+
         /**
          * Normalizes the vector itself, in place, if its norm is not zero.
          * 
@@ -441,6 +471,7 @@ namespace NVector
             return *this;
         }
 
+
         /**
          * Projects the vector along the normalized given vector.
          * 
@@ -457,6 +488,7 @@ namespace NVector
             
             return vector0;
         }
+
 
         /**
          * Returns the dot product of an NVector with another NVector.
@@ -482,6 +514,7 @@ namespace NVector
             return accum;
         }
 
+
         /**
          * Returns the L2 norm of the vector.
          * 
@@ -491,6 +524,7 @@ namespace NVector
         {
             return std::sqrt(normSquared());
         }
+
 
         /**
          * Returns the L2 norm, squared, of the vector.
@@ -502,13 +536,16 @@ namespace NVector
             return dotProduct(*this);
         }
 
+
         private:
         //######################################################################
         // Variables
         //######################################################################
 
+
         // Vector that contains the variables.
         std::vector<T> container{0};
+
 
         // Size of the vector to be constructed.
         size_t dimension{0};

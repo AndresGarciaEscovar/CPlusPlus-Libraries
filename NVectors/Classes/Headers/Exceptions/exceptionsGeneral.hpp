@@ -4,13 +4,16 @@
 */
 #pragma once
 
+
 //##############################################################################
 // Imports.
 //##############################################################################
 
+
 // General.
 #include <exception>
 #include <string>
+
 
 //##############################################################################
 // Namespaces.
@@ -23,6 +26,7 @@ namespace ExceptionsGeneral
     // Exception Classes.
     //##########################################################################
 
+
     /**
      * Class that builds the exceptions when the number of requested dimensions
      * doesn't match the number of expected dimensions.
@@ -33,11 +37,12 @@ namespace ExceptionsGeneral
         // Public Interface.
         //######################################################################
 
-        public:
 
+        public:
         //----------------------------------------------------------------------
         // Constructor.
         //----------------------------------------------------------------------
+
 
         /**
          * Constructor for the exception, customizes the exception message.
@@ -55,6 +60,7 @@ namespace ExceptionsGeneral
             "\n\tRequested: " + std::to_string(requested) + "\n";
         }
 
+
         /**
          * Throws the exception.
         */
@@ -64,19 +70,22 @@ namespace ExceptionsGeneral
             return message.c_str();
         }
 
+
         //######################################################################
         // Private Interface.
         //######################################################################
 
-        private:
 
+        private:
         //----------------------------------------------------------------------
         // Variables.
         //----------------------------------------------------------------------
 
+
         // String that contains the exception message.
         std::string message{};
     };
+
 
     /**
      * Class that builds the exceptions when a division by zero is attempted.
@@ -87,11 +96,12 @@ namespace ExceptionsGeneral
         // Public Interface.
         //######################################################################
 
-        public:
 
+        public:
         //----------------------------------------------------------------------
         // Constructor.
         //----------------------------------------------------------------------
+
 
         /**
          * Constructor for the exception, customizes the exception message.
@@ -103,52 +113,6 @@ namespace ExceptionsGeneral
             "possible.";
         }
 
-        /**
-         * Throws the exception.
-        */
-        virtual const char * what() const throw()
-        {   
-            // Set the custom message.
-            return message.c_str();
-        }
-
-        //######################################################################
-        // Private Interface.
-        //######################################################################
-
-        private:
-
-        //----------------------------------------------------------------------
-        // Variables.
-        //----------------------------------------------------------------------
-
-        // String that contains the exception message.
-        std::string message{};
-    };
-
-    /**
-     * Class that builds the exceptions when an index is out of bounds.
-    */
-    class Numerical : virtual public std::exception
-    {
-        //######################################################################
-        // Public Interface.
-        //######################################################################
-
-        public:
-
-        //----------------------------------------------------------------------
-        // Constructor.
-        //----------------------------------------------------------------------
-
-        /**
-         * Constructor for the exception, customizes the exception message.
-        */
-        Numerical()
-        {
-            // Create the message.
-            message = "The requested variable is not of numerical type.";
-        }
 
         /**
          * Throws the exception.
@@ -159,19 +123,22 @@ namespace ExceptionsGeneral
             return message.c_str();
         }
 
+
         //######################################################################
         // Private Interface.
         //######################################################################
 
-        private:
 
+        private:
         //----------------------------------------------------------------------
         // Variables.
         //----------------------------------------------------------------------
 
+
         // String that contains the exception message.
         std::string message{};
     };
+
 
     /**
      * Class that builds the exceptions when an index is out of range.
@@ -182,11 +149,12 @@ namespace ExceptionsGeneral
         // Public Interface.
         //######################################################################
 
-        public:
 
+        public:
         //----------------------------------------------------------------------
         // Constructor.
         //----------------------------------------------------------------------
+
 
         /**
          * Constructor for the exception, customizes the exception message.
@@ -206,6 +174,7 @@ namespace ExceptionsGeneral
             "]\n\tRequested: " + std::to_string(requested) + "\n";
         }
 
+
         /**
          * Throws the exception.
         */
@@ -215,15 +184,17 @@ namespace ExceptionsGeneral
             return message.c_str();
         }
 
+
         //######################################################################
         // Private Interface.
         //######################################################################
 
-        private:
 
+        private:
         //----------------------------------------------------------------------
         // Variables.
         //----------------------------------------------------------------------
+
 
         // String that contains the exception message.
         std::string message{};
