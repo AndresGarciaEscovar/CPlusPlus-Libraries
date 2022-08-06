@@ -279,7 +279,7 @@ namespace NVector
          * 
          * @param vector A reference to the vector to be printed.
         */
-        friend std::ostream& operator << (std::ostream& out, NVector<T>& vector)
+        friend std::ostream& operator << (std::ostream& out, NVector<T> vector)
         {   
             // Open the vector.
             out << "(";
@@ -378,6 +378,44 @@ namespace NVector
         ////////////////////////////////////////////////////////////////////////
         // Template Functions
         ////////////////////////////////////////////////////////////////////////
+
+        /**
+         * Returns the normalized version of the vector itself.
+         * 
+         * @return The normalized vector, if its norm is not zero.
+        */ 
+        NVector<T> normalize()
+        {
+            // Validate the sizes are the same.
+            T vnorm = norm();
+            ValidationGeneral::isNotDivingByZero(vnorm, true);
+
+            // Auxiliary variables.
+            NVector<T> vector = NVector<T>(dimension);
+            
+            // Divide each entry by its norm.
+            for(size_t i = 0; i < dimension; ++i)
+                vector[i] = container[i] / vnorm;
+            
+            return vector;
+        }
+
+        /**
+         * Normalizes the vector itself, in place, if its norm is not zero.
+         * 
+         * @return A copy of the normalized vector.
+        */ 
+        NVector<T> normalizeIP()
+        {
+            // Validate the sizes are the same.
+            T vnorm = norm();
+            ValidationGeneral::isNotDivingByZero(vnorm, true);
+            
+            // Divide each entry by its norm.
+            for(size_t i = 0; i < dimension; ++i) container[i] /= vnorm;
+            
+            return *this;
+        }
 
         /**
          * Returns the dot product of an NVector with another NVector.

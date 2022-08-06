@@ -28,9 +28,11 @@ int main()
      
     temp =  (temp1 + temp2) * 0.5;
 
-    std::cout << (temp == temp) << std::endl;
+    std::cout << "Equal to itself? " << (temp == temp) << std::endl;
     std::cout << "Dot product: " << temp.dotProduct(temp1) << std::endl;
-    std::cout << temp.normSquared() << std::endl;
+    std::cout << "Norm squared: " << temp.normSquared() << std::endl;
+    std::cout << "Normalized: " << temp.normalizeIP() << std::endl;
+    std::cout << "Norm: " << temp.norm() << std::endl;
 
     return 0;
 }
