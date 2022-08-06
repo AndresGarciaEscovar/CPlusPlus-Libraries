@@ -380,6 +380,30 @@ namespace NVector
         ////////////////////////////////////////////////////////////////////////
 
         /**
+         * Returns the cross product between two vectors.
+         * 
+         * @return The cross product between the two given vectors, where the
+         * cross product will be calculated using the passed vector as the
+         * second argument.
+        */ 
+        NVector<T> crossProduct(NVector<T> vector)
+        {
+            // Validate the sizes are the same and of size 3.
+            ValidationGeneral::validateDimensions(3, size(), true);
+            ValidationGeneral::validateDimensions(size(), vector.size(), true);
+
+            // Auxiliary variables.
+            NVector<T> vector0 = NVector<T>(dimension);
+            
+            // Set the components to the appropriate values.
+            vector0[0] = container[1] * vector[2] - container[2] * vector[1];
+            vector0[1] = container[2] * vector[0] - container[0] * vector[2];
+            vector0[2] = container[0] * vector[1] - container[1] * vector[0];
+            
+            return vector0;
+        }
+
+        /**
          * Returns the normalized version of the vector itself.
          * 
          * @return The normalized vector, if its norm is not zero.
@@ -415,6 +439,23 @@ namespace NVector
             for(size_t i = 0; i < dimension; ++i) container[i] /= vnorm;
             
             return *this;
+        }
+
+        /**
+         * Projects the vector along the normalized given vector.
+         * 
+         * @return The projetion of the vector along the normalized given 
+         * vector.
+        */ 
+        NVector<T> projection(NVector<T> vector)
+        {
+            // Normalize the vector.
+            NVector<T> vector0 = vector.normalize();
+            
+            // Set the components to the appropriate values.
+            vector0 = dotProduct(vector0) * vector0;
+            
+            return vector0;
         }
 
         /**
