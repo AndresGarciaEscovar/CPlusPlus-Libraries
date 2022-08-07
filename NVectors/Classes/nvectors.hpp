@@ -11,7 +11,6 @@
 
 // General.
 #include <iostream>
-#include <limits>
 #include <ostream>
 #include <stdexcept>
 #include <typeinfo>

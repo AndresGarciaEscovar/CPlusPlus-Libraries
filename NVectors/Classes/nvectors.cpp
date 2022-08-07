@@ -10,7 +10,6 @@
 
 // General.
 #include <iostream>
-#include <limits>
 #include <stdexcept>
 #include <typeinfo>
 #include <vector>
@@ -53,8 +52,6 @@ int main()
     temp0[0] = 1.0; temp0[1] = 1.0; temp0[2] = 1.0;
     temp1[0] = 1.0; temp1[1] = 1.0; temp1[2] = 2.0;
     std::cout << "Cross Product: " << temp0.crossProduct(temp1) << std::endl;
-
-    std::cout << std::numeric_limits<long double>::digits10 << std::endl;
 
     return 0;
 }
