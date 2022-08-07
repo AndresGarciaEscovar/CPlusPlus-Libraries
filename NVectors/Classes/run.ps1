@@ -1,10 +1,10 @@
 
 # Compile the program.
-g++ -std=c++17 nvectors.cpp `
+g++ -std=c++17 -o main.exe main.cpp `
     ./Implementations/Validation/validationGeneral.cpp
 
 # Execute the program.
-./a.exe
+./main.exe
 
 # Remove the executable.
-Remove-Item a.exe
+Remove-Item main.exe

@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Compile and link.
-c++ -std=c++17 -o nvectors nvectors.cpp \
+c++ -std=c++17 -o main main.cpp \
     ./Implementations/Validation/validationGeneral.cpp
 
 # Run the progam.
-./nvectors
+./main
 
 # Remove the executable.
-rm nvectors
+rm main
