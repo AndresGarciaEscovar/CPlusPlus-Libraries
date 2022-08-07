@@ -12,14 +12,17 @@
 // General.
 #include <iostream>
 #include <ostream>
-#include <stdexcept>
-#include <typeinfo>
 #include <vector>
 
 
 // User defined.
 #include "./Headers/Validation/validationGeneral.hpp"
 #include "./Headers/Validation/validationNumerical.hpp"
+
+
+//##############################################################################
+// Namespaces
+//##############################################################################
 
 
 namespace NVector
@@ -29,7 +32,7 @@ namespace NVector
     //##########################################################################
 
 
-    template <class T>
+    template <typename T>
     class NVector
     {
         public:
@@ -295,7 +298,7 @@ namespace NVector
             // Auxiliary variables.
             size_t lower{0}, upper{dimension - 1};
 
-            // Exception is thrown if needed.
+            // Validate the index is in range.
             ValidationGeneral::validateInRange(index, lower, upper, true);
 
             return container[index];
@@ -358,6 +361,7 @@ namespace NVector
         //######################################################################
         // Functions
         //######################################################################
+
 
         ////////////////////////////////////////////////////////////////////////
         // Non-Template Functions
