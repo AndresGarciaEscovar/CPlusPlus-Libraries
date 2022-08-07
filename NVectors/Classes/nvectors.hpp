@@ -11,6 +11,7 @@
 
 // General.
 #include <iostream>
+#include <limits>
 #include <ostream>
 #include <stdexcept>
 #include <typeinfo>
@@ -117,7 +118,7 @@ namespace NVector
          * @return A copy of the vector with each of its entries divided by the
          * given value.
         */
-        friend NVector<T> operator / (NVector<T> vector,T value)
+        friend NVector<T> operator / (NVector<T> vector, T value)
         {   
             // Validate finite division.
             ValidationGeneral::isNotDivingByZero(value, true);
@@ -245,12 +246,11 @@ namespace NVector
             bool valid = ValidationGeneral::validateDimensions(
                 vector_1.size(), vector_2.size(), false
             );
-            long double number1{0.0l}, number2{0.0l};
 
             // Check item by item.
-            for(size_t i = 0; valid && i < vector_1.size(); ++i) 
+            for(size_t i = 0; valid && i < vector_1.size(); ++i)
                 valid = valid && vector_1[i] == vector_2[i];
-
+                
             return valid;
         }
 
@@ -265,6 +265,9 @@ namespace NVector
         */
         friend std::ostream& operator << (std::ostream& out, NVector<T> vector)
         {   
+            // Auxiliary variables.
+            size_t length{vector.size() - 1};
+
             // Open the vector.
             out << "(";
 
@@ -272,7 +275,7 @@ namespace NVector
             for(size_t i = 0; i < vector.size(); ++i)
             {
                 out << vector[i];
-                if(i < vector.size() - 1) out << ", ";
+                if(i < length) out << ", ";
             }
 
             // Close the vector.
@@ -315,8 +318,11 @@ namespace NVector
         NVector(size_t dimensions) :
         dimension{dimensions}
         {
-            // Validate that it's a numerical type.
+            // Validate the quantities.
+            ValidationNumerical::rangeGreater<size_t>(0, dimension, true);
             ValidationNumerical::isFloating<T>((T) 1, true);
+
+            // Create with the exact number of entries.
             container = std::vector<T>(dimension, (T) 0);
             container.shrink_to_fit();
         }
@@ -334,8 +340,11 @@ namespace NVector
         NVector(size_t dimensions, T value) :
         dimension{dimensions}
         {   
-            // Validate that it's of a floating type.
+            // Validate the quantities.
+            ValidationNumerical::rangeGreater<size_t>(0, dimension, true);
             ValidationNumerical::isFloating<T>(value, true);
+
+            // Create with the exact number of entries.
             container = std::vector<T>(dimension, value);
             container.shrink_to_fit();
         }
@@ -363,7 +372,7 @@ namespace NVector
         */
         size_t size()
         {
-            return container.size();
+            return dimension;
         }
 
 
