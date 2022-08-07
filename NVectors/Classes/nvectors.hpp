@@ -56,14 +56,10 @@ namespace NVector
         */
         friend NVector<T> operator + (NVector<T> vector, T value)
         {
-            // Create a new vector.
-            NVector<T> vector0 = NVector<T>(vector.size());
-            
             // Add the value to the vector.
-            for(size_t i = 0; i < vector.size(); ++i)
-                vector0[i] = vector[i] + value;
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] += value;
 
-            return vector0;
+            return vector;
         }
 
 
@@ -80,14 +76,10 @@ namespace NVector
         */
         friend NVector<T> operator + (T value, NVector<T> vector)
         {
-            // Create a new vector.
-            NVector<T> vector0 = NVector<T>(vector.size());
-            
             // Add the value to the vector.
-            for(size_t i = 0; i < vector.size(); ++i)
-                vector0[i] = vector[i] + value;
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] += value;
 
-            return vector0;
+            return vector;
         }
 
 
@@ -106,15 +98,11 @@ namespace NVector
             ValidationGeneral::validateDimensions(
                 dimension, vector.size(), true
             );
-
-            // Create a new vector.
-            NVector<T> vector0 = NVector<T>(dimension);
             
-            // Add the value.
-            for(size_t i = 0; i < container.size(); ++i)
-                vector0[i] = container[i] + vector[i];
+            // Add the values.
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] += container[i];
 
-            return vector0;
+            return vector;
         }
 
 
@@ -129,19 +117,15 @@ namespace NVector
          * @return A copy of the vector with each of its entries divided by the
          * given value.
         */
-        NVector<T> operator / (T value)
+        friend NVector<T> operator / (NVector<T> vector,T value)
         {   
             // Validate finite division.
             ValidationGeneral::isNotDivingByZero(value, true);
 
-            // Create a new vector.
-            NVector<T> vector0 = NVector<T>(dimension);
-            
             // Divide each entry.
-            for(size_t i = 0; i < container.size(); ++i)
-                vector0[i] = container[i] / value;
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] /= value;
 
-            return vector0;
+            return vector;
         }
 
 
@@ -158,14 +142,10 @@ namespace NVector
         */
         friend NVector<T> operator * (NVector<T> vector, T value)
         {
-            // Create a new vector.
-            NVector<T> vector0 = NVector<T>(vector.size());
-            
             // Multiply each entry.
-            for(size_t i = 0; i < vector.size(); ++i)
-                vector0[i] = vector[i] * value;
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] *= value;
 
-            return vector0;
+            return vector;
         }
 
 
@@ -182,14 +162,10 @@ namespace NVector
         */
         friend NVector<T> operator * (T value, NVector<T> vector)
         {
-            // Create a new vector.
-            NVector<T> vector0 = NVector<T>(vector.size());
-            
             // Multiply each entry.
-            for(size_t i = 0; i < vector.size(); ++i)
-                vector0[i] = value * vector[i];
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] *= value;
 
-            return vector0;
+            return vector;
         }
 
 
@@ -202,15 +178,11 @@ namespace NVector
          * @param value The value to be subtracted.
         */
         friend NVector<T> operator - (NVector<T> vector, const T value)
-        {
-            // Create a new vector.
-            NVector<T> vector0 = NVector<T>(vector.size());
-            
-            // Add the value.
-            for(size_t i = 0; i < vector.size(); ++i)
-                vector0[i] = vector[i] - value;
+        {           
+            // Subtract from each vector component.
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] -= value;
 
-            return vector0;
+            return vector;
         }
 
 
@@ -223,15 +195,12 @@ namespace NVector
          * @param vector The vector to be subtracted.
         */
         friend NVector<T> operator - (const T value, NVector<T> vector)
-        {
-            // Create a new vector.
-            NVector<T> vector0 = NVector<T>(vector.size());
-            
-            // Add the value.
+        {            
+            // Subtract from each vector entry.
             for(size_t i = 0; i < vector.size(); ++i)
-                vector0[i] = value - vector[i];
+                vector[i] = value - vector[i];
 
-            return vector0;
+            return vector;
         }
 
 
@@ -250,15 +219,12 @@ namespace NVector
             ValidationGeneral::validateDimensions(
                 dimension, vector.size(), true
             );
-
-            // Create a new vector.
-            NVector<T> vector0 = NVector<T>(dimension);
             
-            // Add the value.
+            // Subtract each value.
             for(size_t i = 0; i < container.size(); ++i)
-                vector0[i] = container[i] - vector[i];
+                vector[i] = container[i] - vector[i];
 
-            return vector0;
+            return vector;
         }
 
 
@@ -275,11 +241,10 @@ namespace NVector
         */
         friend bool operator == (NVector<T>& vector_1, NVector<T>& vector_2)
         {   
-            // Check dimensionality.
+            // Auxiliary variables.
             bool valid = ValidationGeneral::validateDimensions(
                 vector_1.size(), vector_2.size(), false
             );
-            
             long double number1{0.0l}, number2{0.0l};
 
             // Check item by item.
@@ -351,15 +316,15 @@ namespace NVector
         dimension{dimensions}
         {
             // Validate that it's a numerical type.
-            T i;
-            ValidationNumerical::isNumber<T>(i, true);
+            ValidationNumerical::isFloating<T>((T) 1, true);
             container = std::vector<T>(dimension, (T) 0);
             container.shrink_to_fit();
         }
 
 
         /**
-         * Constructs a new vector type.
+         * Constructs a new vector type; the only allowed types are floating
+         * type vectors.
          * 
          * @param dimensions The number of entries the vector has; must be 
          * greater than zero.
@@ -369,8 +334,8 @@ namespace NVector
         NVector(size_t dimensions, T value) :
         dimension{dimensions}
         {   
-            // Validate that it's of a numerical type.
-            ValidationNumerical::isNumber<T>(value, true);
+            // Validate that it's of a floating type.
+            ValidationNumerical::isFloating<T>(value, true);
             container = std::vector<T>(dimension, value);
             container.shrink_to_fit();
         }
@@ -475,18 +440,20 @@ namespace NVector
         /**
          * Projects the vector along the normalized given vector.
          * 
+         * @param vector The vector along which the projection will happen.
+         * 
          * @return The projetion of the vector along the normalized given 
          * vector.
         */ 
         NVector<T> projection(NVector<T> vector)
         {
             // Normalize the vector.
-            NVector<T> vector0 = vector.normalize();
+            vector.normalizeIP();
             
             // Set the components to the appropriate values.
-            vector0 = dotProduct(vector0) * vector0;
+            vector = dotProduct(vector) * vector;
             
-            return vector0;
+            return vector;
         }
 
 
