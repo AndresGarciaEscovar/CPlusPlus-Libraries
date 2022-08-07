@@ -41,6 +41,31 @@ namespace VNVectors
         // Operator Overloads
         //######################################################################
 
+
+        ////////////////////////////////////////////////////////////////////////
+        // Arithmetic
+        ////////////////////////////////////////////////////////////////////////
+
+
+        /**
+         * Addition operator overload. To add a scalar quantity to the current
+         * NVector.
+         * 
+         * @param vector The basis vector to be added.
+         * 
+         * @param value The value to be added.
+         *  
+         * @return A copy of the vector with the value added to each of its 
+         * entries.
+        */
+        friend NVector<T> operator + (VNVector<T> vector, T value)
+        {
+            // Add the value to the vector.
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] += value;
+
+            return vector;
+        }
+
         //######################################################################
         // Constructor(s) and Destructor(s)
         //######################################################################
