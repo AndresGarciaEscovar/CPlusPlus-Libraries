@@ -65,6 +65,16 @@ namespace ValidationNumerical
     bool isNumber(T variable, bool exception);
 
 
+    //--------------------------------------------------------------------------
+    // Range Functions
+    //--------------------------------------------------------------------------
+
+
+    // Determines if the given value is greater than the other given value.
+    template <typename T>
+    bool rangeGreater(T value, T variable, bool exception);
+
+
     //##########################################################################
     // Functions
     //##########################################################################
@@ -250,6 +260,41 @@ namespace ValidationNumerical
 
         // Throw an exception if needed.
         if(!valid && exception) throw ExceptionsNumerical::Numerical();
+
+        return valid;
+    }
+
+
+    //--------------------------------------------------------------------------
+    // Range Functions
+    //--------------------------------------------------------------------------
+
+
+    /**
+     * Determines if the given value is greater than the other given value.
+     * 
+     * @param value The lower bound value, not including it.
+     * 
+     * @param variable The variable to compare.
+     * 
+     * @param exception A boolean flag that indicates if an exception must be
+     * thrown if validation fails. True, if an exception must be thrown if 
+     * validation fails; False, otherwise.
+     * 
+     * @return True, if the quantity is greater than the required value; False,
+     * otherwise.
+     * 
+     * @throw ExceptionsNumerical::GreaterThan, if the NOT greater than the
+     * expected value.
+    */ 
+    template <typename T>
+    bool rangeGreater(T value, T variable, bool exception)
+    {
+        // Auxiliary variables.
+        bool valid = variable > value;
+
+        if(!valid && exception)
+            throw ExceptionsNumerical::GreaterThan(value, variable);
 
         return valid;
     }
