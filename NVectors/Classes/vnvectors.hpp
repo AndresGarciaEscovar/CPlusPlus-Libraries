@@ -69,6 +69,27 @@ namespace VNVectors
 
 
         /**
+         * Addition operator overload. To add a scalar quantity to the current
+         * VNVector.
+         * 
+         * @param value The value to be added.
+         * 
+         * @param vector The basis vector of NVectors to be added.
+         *  
+         * @return A copy of the vector of NVectors with the value added to each
+         * of its entries.
+        */
+        friend VNVectors<T> operator + (T value, VNVectors<T> vector)
+        {
+            // Add the value to the vector.
+            for(size_t i = 0; i < vector.size(); ++i) 
+                vector[i] = vector[i] + value;
+
+            return vector;
+        }
+
+
+        /**
          * Addition operator overload. To add an NVector to the current 
          * NVectors in the VNVector.
          * 
