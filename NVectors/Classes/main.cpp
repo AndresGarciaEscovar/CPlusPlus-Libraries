@@ -17,6 +17,7 @@
 
 // User defined.
 #include "./nvectors.hpp"
+#include "./vnvectors.hpp"
 
 
 //##############################################################################
@@ -28,6 +29,9 @@ int main()
 {
     // Auxiliary variables.
     int i = 1;
+    VNVectors::VNVectors<double> vtemp0 = VNVectors::VNVectors<double>(5, 5);
+    
+    // NVectors.
     NVector::NVector<double> temp0 = NVector::NVector<double>(1);
     NVector::NVector<double> temp1 = NVector::NVector<double>(3, 7);
     NVector::NVector<double> temp2 = NVector::NVector<double>(3, 8);
