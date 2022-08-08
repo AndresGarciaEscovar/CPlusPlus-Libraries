@@ -334,7 +334,11 @@ namespace VNVectors
          * Comparison operator. To be able to access the indexes of the
          * vectors of NVectors for comparison.
          * 
-         * @param vector A reference to the vectors being compared.
+         * @param vector_1 A reference to the first vector of NVectors being
+         * compared.
+         * 
+         * @param vector_2 A reference to the second vector of NVectors being
+         * compared.
         */
         friend bool operator == (VNVectors<T>& vector_1, VNVectors<T>& vector_2)
         {   
