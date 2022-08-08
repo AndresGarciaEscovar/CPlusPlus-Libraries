@@ -241,7 +241,7 @@ namespace NVector
          * Comparison operator. To be able to access the indexes of the
          * vector for comparison.
          * 
-         * @param vector A reference to the vector to be compared.
+         * @param vector A reference to the NVectors to be compared.
         */
         friend bool operator == (NVector<T>& vector_1, NVector<T>& vector_2)
         {   

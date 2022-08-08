@@ -331,6 +331,31 @@ namespace VNVectors
 
 
         /**
+         * Comparison operator. To be able to access the indexes of the
+         * vectors of NVectors for comparison.
+         * 
+         * @param vector A reference to the vectors being compared.
+        */
+        friend bool operator == (VNVectors<T>& vector_1, VNVectors<T>& vector_2)
+        {   
+            // Auxiliary variables.
+            bool valid = ValidationGeneral::validateDimensions(
+                vector_1.size(), vector_2.size(), false
+            );
+
+            valid = valid && ValidationGeneral::validateDimensions(
+                vector_1[0].size(), vector_2[0].size(), false
+            );
+
+            // Check item by item.
+            for(size_t i = 0; valid && i < vector_1.size(); ++i)
+                valid = valid && vector_1[i] == vector_2[i];
+                
+            return valid;
+        }
+
+
+        /**
          * Outstream string to be print the vector of NVectors. To be able to
          * view the contents of the vector of NVectors.
          * 
