@@ -386,7 +386,7 @@ namespace VNVectors
         NVector::NVector<T>& operator [] (size_t index)
         {   
             // Auxiliary variables.
-            size_t lower{0}, upper{dimension - 1};
+            size_t lower{0}, upper{vsize - 1};
 
             // Validate the index is in range.
             ValidationGeneral::validateInRange(index, lower, upper, true);
@@ -450,6 +450,34 @@ namespace VNVectors
         size_t size()
         {
             return vsize;
+        }
+
+
+        ////////////////////////////////////////////////////////////////////////
+        // Non-Template Functions
+        ////////////////////////////////////////////////////////////////////////
+
+
+        /**
+         * Projects the vector along the normalized given vector.
+         * 
+         * @param vector The vector along which the projection will happen.
+         * 
+         * @return The projetion of the vector along the normalized given 
+         * vector.
+        */ 
+        VNVectors<T> projection(NVector::NVector<T> vector, bool normalize)
+        {
+            // Normalize the vector, if required.
+            if(normalize) vector.normalizeIP();
+            
+            VNVectors<T> nvector = *this;
+
+            // Set the components to the appropriate values.
+            for(size_t i = 0; i < nvector.size(); ++i) 
+                nvector[i] = nvector[i].projection(vector, false);
+            
+            return nvector;
         }
 
 
