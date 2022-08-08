@@ -266,7 +266,7 @@ namespace NVector
          * 
          * @param out A reference to the ostream operator.
          * 
-         * @param vector A reference to the vector to be printed.
+         * @param vector A copy of the vector to be printed.
         */
         friend std::ostream& operator << (std::ostream& out, NVector<T> vector)
         {   

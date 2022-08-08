@@ -365,7 +365,7 @@ namespace VNVectors
          * 
          * @param out A reference to the ostream operator.
          * 
-         * @param vect A reference to the vector of NVectors to be printed.
+         * @param vect A copy of the vector of NVectors to be printed.
         */
         friend std::ostream& operator << (std::ostream& out, VNVectors<T> vect)
         {   
