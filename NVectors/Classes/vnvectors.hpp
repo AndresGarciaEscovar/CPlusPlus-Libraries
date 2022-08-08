@@ -10,6 +10,7 @@
 
 
 // General.
+#include <iomanip>
 #include <iostream>
 #include <ostream>
 #include <vector>
@@ -93,6 +94,29 @@ namespace VNVectors
          * Addition operator overload. To add an NVector to the current 
          * NVectors in the VNVector.
          * 
+         * @param value The NVector to be added.
+         * 
+         * @param vector The basis vector of NVectors to be added.
+         *  
+         * @return A copy of the vector of NVectors with the value added to each
+         * of its entries.
+        */
+        friend VNVectors<T> operator + (
+            NVector::NVector<T> value, VNVectors<T> vector
+        )
+        {
+            // Add the value to the vector.
+            for(size_t i = 0; i < vector.size(); ++i) 
+                vector[i] = vector[i] + value;
+
+            return vector;
+        }
+
+
+        /**
+         * Addition operator overload. To add an NVector to the current 
+         * NVectors in the VNVector.
+         * 
          * @param vector The basis vector of NVectors to be added.
          * 
          * @param value The NVector to be added.
@@ -124,9 +148,7 @@ namespace VNVectors
         VNVectors<T> operator + (VNVectors<T> vector)
         {
             // Validate the dimensionality of the vector to be added.
-            ValidationGeneral::validateDimensions(
-                vsize, vector.size(), true
-            );
+            ValidationGeneral::validateDimensions(vsize, vector.size(), true);
 
             // Add the value to the vector.
             for(size_t i = 0; i < vector.size(); ++i) 
@@ -136,9 +158,194 @@ namespace VNVectors
         }
 
 
+        /**
+         * Division operator overload. To divide each entry of the vector of
+         * NVectors by the given scalar quantity.
+         * 
+         * @param vector The vector of NVectors to be divided.
+         * 
+         * @param value The value by which each vector will be divided.
+         *  
+         * @return A copy of the vector of NVectors with each of its entries
+         * divided by the given value.
+        */
+        friend VNVectors<T> operator / (VNVectors<T> vector, T value)
+        { 
+            // Divide each entry.
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] /= value;
+
+            return vector;
+        }
+
+
+        /**
+         * Multiplication operator overload. To multiply each entry of the
+         * vector of NVectors by the given scalar quantity.
+         * 
+         * @param vector The vector of NVectors to be multiplied.
+         * 
+         * @param value The value by which each entry will be multiplied.
+         *  
+         * @return A copy of the vector of NVectors with each of its entries 
+         * multiplied by the given value.
+        */
+        friend VNVectors<T> operator * (VNVectors<T> vector, T value)
+        {
+            // Multiply each entry.
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] *= value;
+
+            return vector;
+        }
+
+
+        /**
+         * Multiplication operator overload. To multiply each entry of the
+         * vector of NVectors by the given scalar quantity.
+         * 
+         * @param value The value by which each entry will be multiplied.
+         * 
+         * @param vector The vector of NVectors to be multiplied.
+         * 
+         * @return A copy of the vector of NVectors with each of its entries 
+         * multiplied by the given value.
+        */
+        friend VNVectors<T> operator * (T value, VNVectors<T> vector)
+        {
+            // Multiply each entry.
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] *= value;
+
+            return vector;
+        }
+
+
+        /**
+         * Subtraction operator overload. To subtract a scalar quantity from the
+         * current vector of NVectors.
+         * 
+         * @param vector The vector of NVectors from which the value will be
+         * subtracted.
+         * 
+         * @param value The value to be subtracted.
+        */
+        friend VNVectors<T> operator - (VNVectors<T> vector, const T value)
+        {           
+            // Subtract from each vector component.
+            for(size_t i = 0; i < vector.size(); ++i) vector[i] -= value;
+
+            return vector;
+        }
+
+
+        /**
+         * Subtraction operator overload. To subtract a scalar quantity from the
+         * current vector of NVectors and make it negative.
+         * 
+         * @param value The value to be subtracted. 
+         * 
+         * @param vector The vector of NVectors from which the value will be
+         * subtracted.
+        */
+        friend VNVectors<T> operator - (const T value, VNVectors<T> vector)
+        {            
+            // Subtract from each vector entry.
+            for(size_t i = 0; i < vector.size(); ++i)
+                vector[i] = value - vector[i];
+
+            return vector;
+        }
+
+
+        /**
+         * Subtraction operator overload. To subtract an NVector from the 
+         * current NVectors in the VNVector.
+         * 
+         * @param vector The basis vector of NVectors from which the NVector
+         * will be subtracted.
+         * 
+         * @param value The NVector to be added.
+         *  
+         * @return A copy of the vector of NVectors with the value subtracted
+         * from each of its entries.
+        */
+        friend VNVectors<T> operator - (
+            VNVectors<T> vector, NVector::NVector<T> value
+        )
+        {
+            // Add the value to the vector.
+            for(size_t i = 0; i < vector.size(); ++i) 
+                vector[i] = vector[i] - value;
+
+            return vector;
+        }
+
+
+        /**
+         * Subtraction operator overload. To subtract an NVector from the 
+         * current NVectors in the VNVector, and then made negative.
+         * 
+         * @param value The NVector to be subtracted.
+         * 
+         * @param vector The basis vector of NVectors from which the NVector
+         * will be subtracted.
+         *  
+         * @return A copy of the vector of NVectors with the value subtracted
+         * from each of its entries and then made negative.
+        */
+        friend VNVectors<T> operator - (
+            NVector::NVector<T> value, VNVectors<T> vector
+        )
+        {
+            // Add the value to the vector.
+            for(size_t i = 0; i < vector.size(); ++i) 
+                vector[i] = value - vector[i];
+
+            return vector;
+        }
+
+
+        /**
+         * Subtraction operator overload. To subtract another vector of NVectors
+         * from the current vector of VNVector.
+         * 
+         * @param vector The vector to be added to the current vector.
+         * 
+         * @return A copy of the vector with the value added to each of its
+         * entries.
+        */
+        VNVectors<T> operator - (VNVectors<T> vector)
+        {
+            // Validate the dimensionality of the vector to be added.
+            ValidationGeneral::validateDimensions(vsize, vector.size(), true);
+            
+            // Subtract each value.
+            for(size_t i = 0; i < container.size(); ++i)
+                vector[i] = container[i] - vector[i];
+
+            return vector;
+        }
+
+
         ////////////////////////////////////////////////////////////////////////
         // Other Functionality
         ////////////////////////////////////////////////////////////////////////
+
+
+        /**
+         * Outstream string to be print the vector of NVectors. To be able to
+         * view the contents of the vector of NVectors.
+         * 
+         * @param out A reference to the ostream operator.
+         * 
+         * @param vect A reference to the vector of NVectors to be printed.
+        */
+        friend std::ostream& operator << (std::ostream& out, VNVectors<T> vect)
+        {   
+            // Print the content.
+            for(size_t i = 0; i < vect.size(); ++i)
+                out << std::setprecision(7) << vect[i] << std::endl;
+                
+            return out;
+        }
 
 
         /**
@@ -189,6 +396,7 @@ namespace VNVectors
             container.shrink_to_fit();
         }
 
+
         /**
          * Destructs the given object pointer.
         */
@@ -199,6 +407,23 @@ namespace VNVectors
         // Functions
         //######################################################################
         
+
+        ////////////////////////////////////////////////////////////////////////
+        // Non-Template Functions
+        ////////////////////////////////////////////////////////////////////////
+
+
+        /**
+         * Returns the current size of the container.
+         * 
+         * @return The current size of the container.
+        */
+        size_t size()
+        {
+            return vsize;
+        }
+
+
         private:
         //######################################################################
         // Variables
