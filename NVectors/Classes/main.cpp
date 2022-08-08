@@ -30,6 +30,10 @@ int main()
     // Auxiliary variables.
     int i = 1;
     VNVectors::VNVectors<double> vtemp0 = VNVectors::VNVectors<double>(5, 5);
+
+    vtemp0[3][2] = 9.9l;
+
+    std::cout << vtemp0 << std::endl;
     
     // NVectors.
     NVector::NVector<double> temp0 = NVector::NVector<double>(1);
