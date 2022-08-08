@@ -35,9 +35,6 @@ int main()
     NVector::NVector<double> temp0 = NVector::NVector<double>(3, 1);
     NVector::NVector<double> temp1 = NVector::NVector<double>(3, 7);
     NVector::NVector<double> temp2 = NVector::NVector<double>(3, 8);
-     
-    temp0 =  (temp1 + temp2) * 0.5;
-    std::cout << vtemp0.projection(temp0, true) << std::endl;
     
     std::cout << "Equal to itself? " << (temp0 == temp0) << std::endl;
     std::cout << "Dot product: " << temp0.dotProduct(temp1) << std::endl;
