@@ -460,10 +460,10 @@ namespace NVector
          * @return The projetion of the vector along the normalized given 
          * vector.
         */ 
-        NVector<T> projection(NVector<T> vector)
+        NVector<T> projection(NVector<T> vector, bool normalize)
         {
-            // Normalize the vector.
-            vector.normalizeIP();
+            // Normalize the vector, if required.
+            if(normalize) vector.normalizeIP();
             
             // Set the components to the appropriate values.
             vector = dotProduct(vector) * vector;
