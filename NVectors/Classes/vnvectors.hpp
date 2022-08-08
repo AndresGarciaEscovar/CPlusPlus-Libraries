@@ -172,7 +172,8 @@ namespace VNVectors
         friend VNVectors<T> operator / (VNVectors<T> vector, T value)
         { 
             // Divide each entry.
-            for(size_t i = 0; i < vector.size(); ++i) vector[i] /= value;
+            for(size_t i = 0; i < vector.size(); ++i)
+                vector[i] = vector[i] / value;
 
             return vector;
         }
@@ -192,7 +193,8 @@ namespace VNVectors
         friend VNVectors<T> operator * (VNVectors<T> vector, T value)
         {
             // Multiply each entry.
-            for(size_t i = 0; i < vector.size(); ++i) vector[i] *= value;
+            for(size_t i = 0; i < vector.size(); ++i) 
+                vector[i] = vector[i] * value;
 
             return vector;
         }
@@ -212,7 +214,8 @@ namespace VNVectors
         friend VNVectors<T> operator * (T value, VNVectors<T> vector)
         {
             // Multiply each entry.
-            for(size_t i = 0; i < vector.size(); ++i) vector[i] *= value;
+            for(size_t i = 0; i < vector.size(); ++i)
+                vector[i] = vector[i] * value;
 
             return vector;
         }
@@ -230,7 +233,8 @@ namespace VNVectors
         friend VNVectors<T> operator - (VNVectors<T> vector, const T value)
         {           
             // Subtract from each vector component.
-            for(size_t i = 0; i < vector.size(); ++i) vector[i] -= value;
+            for(size_t i = 0; i < vector.size(); ++i) 
+                vector[i] = vector[i] - value;
 
             return vector;
         }
