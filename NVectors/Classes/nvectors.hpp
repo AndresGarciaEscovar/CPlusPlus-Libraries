@@ -10,6 +10,7 @@
 
 
 // General.
+#include <iomanip>
 #include <iostream>
 #include <ostream>
 #include <vector>
@@ -276,7 +277,7 @@ namespace NVector
             // Print the content.
             for(size_t i = 0; i < vector.size(); ++i)
             {
-                out << vector[i];
+                out << std::setprecision(7) << (long double) vector[i];
                 if(i < length) out << ", ";
             }
 
